@@ -85,10 +85,14 @@ PolyLife.prototype._bindWindowEvents = function () {
     };
   })();
   
- 
   var thisRef = this;
   $(window).resize( function () {
     thisRef._windowResized();
+  });
+
+  // Testing Only
+  $(window).click(function() {
+    thisRef._testExplode();
   });
 }
 
@@ -139,7 +143,20 @@ PolyLife.prototype._initTestObjects = function () {
     acceleration: -2
   }));
   */
- 
+  
+  this._testExplode();
+}
+
+PolyLife.prototype._removeObjects = function(objects) {
+  for( index in objects ) {
+    objects[index].destroyThreeObject();
+    delete objects[index];
+  }
+  objects.length = 0;
+}
+
+PolyLife.prototype._testExplode = function () {
+  this._removeObjects(this.plants);
   for( var p = 0; p < 500; p++ ) {
     this.plants.push(new PlantOrganism({
       scene: this.scene,
@@ -150,7 +167,7 @@ PolyLife.prototype._initTestObjects = function () {
         z: 0
       },
       movementTheta: ( Math.random() * Math.PI * 2 ),
-      movementTau: ( Math.random() * Math.PI / 2 + Math.PI / 4 ),
+      movementTau: ( Math.random() * Math.PI * ( 3 / 4 ) + Math.PI / 8 ),
       velocity: Math.random() * 30 + 10,
       acceleration: Math.random() * -5 - 1,
     }));

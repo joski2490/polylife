@@ -97,6 +97,12 @@ PlantOrganism.prototype.generateThreeObject = function () {
   this.scene.add(this.threeObject);
 }
 
+PlantOrganism.prototype.destroyThreeObject = function () {
+  this.scene.remove(this.threeObject);
+  delete this.threeObject;
+  this.threeObject = null;
+}
+
 PlantOrganism.prototype.update = function (timeDelta) {
   if( this.acceleration != 0.00 ) {
     // Cheap
@@ -240,6 +246,12 @@ HerbivoreOrganism.prototype.generateThreeObject = function () {
   this.scene.add(this.threeObject);
 }
 
+HerbivoreOrganism.prototype.destroyThreeObject = function () {
+  this.scene.remove(this.threeObject);
+  delete this.threeObject;
+  this.threeObject = null;
+}
+
 HerbivoreOrganism.prototype.update = function (timeDelta) {
   if( this.acceleration != 0.00 ) {
     // Cheap
@@ -379,6 +391,12 @@ CarnivoreOrganism.prototype.generateThreeObject = function () {
   this.scene.add(this.threeObject);
 }
 
+CarnivoreOrganism.prototype.destroyThreeObject = function () {
+  this.scene.remove(this.threeObject);
+  delete this.threeObject;
+  this.threeObject = null;
+}
+
 CarnivoreOrganism.prototype.update = function (timeDelta) {
   if( this.acceleration != 0.00 ) {
     // Cheap
@@ -516,6 +534,12 @@ OmnivoreOrganism.prototype.generateThreeObject = function () {
     this.rotation.z
   );
   this.scene.add(this.threeObject);
+}
+
+OmnivoreOrganism.prototype.destroyThreeObject = function () {
+  this.scene.remove(this.threeObject);
+  delete this.threeObject;
+  this.threeObject = null;
 }
 
 OmnivoreOrganism.prototype.update = function (timeDelta) {
