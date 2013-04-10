@@ -54,17 +54,17 @@ var RadiusCameraControls = function (parameters) {
     this.maxTheta = parseFloat(parameters.maxTheta);
   }
   
-  this.tau = 0.00;
-  this.minTau = null;
-  this.maxTau = null;
-  if( typeof parameters.tau != "undefined" ) {
-    this.tau = parseFloat(parameters.tau);
+  this.phi = 0.00;
+  this.minPhi = null;
+  this.maxPhi = null;
+  if( typeof parameters.phi != "undefined" ) {
+    this.phi = parseFloat(parameters.phi);
   }
-  if( typeof parameters.minTau != "undefined" ) {
-    this.minTau = parseFloat(parameters.minTau);
+  if( typeof parameters.minPhi != "undefined" ) {
+    this.minPhi = parseFloat(parameters.minPhi);
   }
-  if( typeof parameters.maxTau != "undefined" ) {
-    this.maxTau = parseFloat(parameters.maxTau);
+  if( typeof parameters.maxPhi != "undefined" ) {
+    this.maxPhi = parseFloat(parameters.maxPhi);
   }
 
   this.dragActive = false;
@@ -88,9 +88,9 @@ RadiusCameraControls.prototype._updateRadius = function (delta) {
   }
 }
 
-RadiusCameraControls.prototype._updateAngle = function (dTheta, dTau) {
+RadiusCameraControls.prototype._updateAngle = function (dTheta, dPhi) {
   this.theta += ( dTheta * 0.01 );
-  this.tau -= ( dTau * 0.01 );
+  this.phi -= ( dPhi * 0.01 );
   if( this.minTheta != null &&
       this.theta < this.minTheta ) {
     this.theta = this.minTheta;
@@ -99,13 +99,13 @@ RadiusCameraControls.prototype._updateAngle = function (dTheta, dTau) {
            this.theta > this.maxTheta ) {
     this.theta = this.maxTheta;
   }
-  if( this.minTau != null &&
-      this.tau < this.minTau ) {
-    this.tau = this.minTau;
+  if( this.minPhi != null &&
+      this.phi < this.minPhi ) {
+    this.phi = this.minPhi;
   }
-  else if( this.maxTau != null &&
-           this.tau > this.maxTau ) {
-    this.tau = this.maxTau;
+  else if( this.maxPhi != null &&
+           this.phi > this.maxPhi ) {
+    this.phi = this.maxPhi;
   }
 }
 
@@ -159,13 +159,13 @@ RadiusCameraControls.prototype.stopPath = function () {
 RadiusCameraControls.prototype.updateCamera = function () {
   this.camera.position.x =
     this.focus.x + 
-    this.radius * Math.sin( this.tau ) * Math.cos( this.theta );
+    this.radius * Math.sin( this.phi ) * Math.cos( this.theta );
   this.camera.position.z =
     this.focus.z + 
-    this.radius * Math.sin( this.tau ) * Math.sin( this.theta );
+    this.radius * Math.sin( this.phi ) * Math.sin( this.theta );
   this.camera.position.y = 
     this.focus.y + 
-    this.radius * Math.cos( this.tau );
+    this.radius * Math.cos( this.phi );
 
   this.camera.lookAt(this.focus);
 }

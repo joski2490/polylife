@@ -34,9 +34,9 @@ var PolyLife = function (parameters) {
       y: 0,
       z: 0
     },
-    minTau: ( 0.01 ),
-    maxTau: ( Math.PI / 2 ),
-    tau: ( 1 ),
+    minPhi: ( 0.01 ),
+    maxPhi: ( Math.PI / 2 ),
+    phi: ( 1 ),
     radius: 200
   });
 
@@ -91,8 +91,11 @@ PolyLife.prototype._bindWindowEvents = function () {
   });
 
   // Testing Only
-  $(window).click(function() {
-    thisRef._testExplode();
+  $(window).keyup( function (e) {
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if( code == 32 ) {
+      thisRef._testExplode();
+    }
   });
 }
 
@@ -158,7 +161,7 @@ PolyLife.prototype._removeObjects = function(objects) {
 PolyLife.prototype._testExplode = function () {
   this._removeObjects(this.plants);
   for( var p = 0; p < 500; p++ ) {
-    this.plants.push(new PlantOrganism({
+    this.plants.push(new Plant({
       scene: this.scene,
       size: PolyLife._generateRandomSize(1,3),
       position: {
@@ -167,8 +170,8 @@ PolyLife.prototype._testExplode = function () {
         z: 0
       },
       movementTheta: ( Math.random() * Math.PI * 2 ),
-      movementTau: ( Math.random() * Math.PI * ( 3 / 4 ) + Math.PI / 8 ),
-      velocity: Math.random() * 30 + 10,
+      movementPhi: ( Math.random() * Math.PI * ( 3 / 4 ) + Math.PI / 8 ),
+      velocity: Math.random() * 20 + 20,
       acceleration: Math.random() * -5 - 1,
     }));
   }

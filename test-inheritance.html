@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<link href="css/scene.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<script src="js/test-inheritance.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var testParent = new Parent();
+			console.log(testParent.toString());
+			var testParent2 = new Parent({
+				size: 1,
+				name: 'Parent 2'
+			});
+			console.log(testParent2.toString());
+			var testChild = new Child();
+			console.log(testChild.toString());
+			var testChild = new Child({
+				size: 10,
+				name: 'CHILD!'
+			});
+		</script>
+	</body>
+</html>
