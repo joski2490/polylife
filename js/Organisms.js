@@ -154,6 +154,10 @@ Organism.prototype.update = function (timeDelta) {
   this.updatePosition(timeDelta);
 }
 
+Organism.prototype.think = function (plants, herbivores, omnivores, carnivores) {
+  // Override w/ specifics.
+}
+
 var Plant = function (parameters) {
   this.init(parameters);
 }
@@ -185,6 +189,60 @@ Plant.prototype.generateThreeObject = function () {
   this.scene.add(this.threeObject);
 }
 
+var Herbivore = function (parameters) {
+  this.init(parameters);
+}
+Herbivore.prototype = new Organism();
+Herbivore.prototype.constructor = Herbivore;
+Herbivore.prototype.parent = Organism.prototype;
+
+Herbivore.colorHex = 0x0090ff;
+
+Herbivore.prototype.generateThreeObject = function () {
+  this.threeObject = new THREE.Mesh(
+    new THREE.QuadrahedronConnectedGeometry(this.size),
+    new THREE.MeshBasicMaterial({
+      color: Herbivore.colorHex,
+      wireframe: true,
+      wireframeLinewidth: 1,
+    })
+  );
+  this.threeObject.position.set(
+    this.position.x,
+    this.position.y,
+    this.position.z
+  );
+  this.threeObject.rotation.set(
+    this.rotation.x,
+    this.rotation.y,
+    this.rotation.z
+  );
+  this.scene.add(this.threeObject);
+}
+
+Herbivore.prototype.think = function (plants, herbivores, omnivores, carnivores) {
+  // Primary concern = find food.
+  var targetIndex = false;
+  var targetDistance = false;
+  var tempDistance;
+  for( index in plants ) {
+    tempDistance = Math.sqrt( 
+      Math.pow(( this.position.x - plants[i].position.x),2) +
+      Math.pow(( this.position.y - plants[i].position.y),2) +
+      Math.pow(( this.position.z - plants[i].position.z),2) );
+    if( ! targetDistance ||
+      targetDistance > tempDistance ) {
+      targetIndex = index;
+    }
+  }
+  // Move towards targetIndex position.
+  this.movementPhi = Math.atan( ( plants[targetIndex].position.x - this.position.x ) / ( plants[targetIndex].position.z - this.position.z ) );
+  this.movementTheta = Math.atan( Math.sqrt( 
+    ( Math.pow(( plants[targetIndex].position.x - this.position.x ), 2) +
+      Math.pow(( plants[targetIndex].position.z - this.position.z ), 2) )
+    ) / ( plants[targetIndex].position.y - this.position.y ) );
+  this.acceleration = 3;
+}
 
 /*
 

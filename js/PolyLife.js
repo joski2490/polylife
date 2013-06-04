@@ -148,6 +148,8 @@ PolyLife.prototype._initTestObjects = function () {
   */
   
   this._testExplode();
+
+  this._testHerbivore();
 }
 
 PolyLife.prototype._removeObjects = function(objects) {
@@ -177,6 +179,18 @@ PolyLife.prototype._testExplode = function () {
   }
 }
 
+PolyLife.prototype._testHerbivore = function () {
+  this.herbivores.push(new Herbivore({
+    scene: this.scene,
+    size: 4,
+    position: {
+      x: 0,
+      y: 0,
+      z: 0
+    }
+  }));
+}
+
 PolyLife._generateRandomSize = function (min, max) {
   return ( Math.random() * ( max - min ) + min );
 }
@@ -200,6 +214,7 @@ PolyLife.prototype._runLoop = function () {
   }
   for( i = 0; i < this.herbivores.length; i++ ) {
     this.herbivores[i].update(timeDelta);
+    this.herbivores[i].think( this.plants, this.herbivores, this.omnivores, this.carnivores );
   }
   for( i = 0; i < this.carnivores.length; i++ ) {
     this.carnivores[i].update(timeDelta);
