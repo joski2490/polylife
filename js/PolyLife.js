@@ -102,9 +102,9 @@ PolyLife.prototype._bindWindowEvents = function () {
 
 // Insert everything
 // Looks cool - fairly useless.
-PolyLife.prototype._initTestObjects = function () {
+//PolyLife.prototype._initTestObjects = function () {
   
-  /*
+
   for( var p = 0; p < 1000; p++ ) {
     this.plants.push(new PlantOrganism({
       scene: this.scene,
@@ -135,17 +135,16 @@ PolyLife.prototype._initTestObjects = function () {
       size: PolyLife._generateRandomSize(2,4),
       position: PolyLife._generateRandomPosition(-1000,1000,-300,300,-1000,1000)
     }));
-  }
-  */
+   }
   
-  /*
+  
   this.omnivores.push(new OmnivoreOrganism({
     scene: this.scene,
     size: 3,
     velocity: 20,
     acceleration: -2
   }));
-  */
+  
   
   this._testExplode();
 
