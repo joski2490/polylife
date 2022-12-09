@@ -244,8 +244,6 @@ Herbivore.prototype.think = function (plants, herbivores, omnivores, carnivores)
   this.acceleration = 3;
 }
 
-/*
-
 // Herbivore
 var HerbivoreOrganism = function (parameters) {
   if( typeof parameters == "undefined" ) {
@@ -681,5 +679,3 @@ OmnivoreOrganism.prototype.update = function (timeDelta) {
   this.threeObject.rotation.z += this.rotationDelta.z * timeDelta;
 
 }
-
-*/
