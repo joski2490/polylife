@@ -102,7 +102,7 @@ PolyLife.prototype._bindWindowEvents = function () {
 
 // Insert everything
 // Looks cool - fairly useless.
-//PolyLife.prototype._initTestObjects = function () {
+PolyLife.prototype._initTestObjects = function () {
   
 
   for( var p = 0; p < 1000; p++ ) {
